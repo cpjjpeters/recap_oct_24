@@ -24,20 +24,20 @@ public class CityController {
 
     @GetMapping(value="welkom")
     public String hello(Model model, @RequestParam(value="name", required=false, defaultValue="World") String name) {
-//        log.debug("Welcome!");
+        log.debug("Welcome!");
         model.addAttribute("name", name);
         return "welcome";
     }
 
     @GetMapping(value = {"indeks", "all"})
     public String index(Model model) {
-//    log.debug("getmapping slash");
+    log.debug("getmapping slash");
         return "index";
     }
 
     @GetMapping(value="steden")
     public ModelAndView showCities() {
-//        log.debug("getmapping slash cities");
+        log.debug("getmapping slash cities");
         var cities = cityJpaPersistenceService.findAll();
 
         var params = new HashMap<String, Object>();

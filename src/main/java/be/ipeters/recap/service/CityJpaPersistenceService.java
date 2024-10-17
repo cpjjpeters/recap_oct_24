@@ -33,7 +33,7 @@ public class CityJpaPersistenceService {
 
     public City save(City city) {
         final CityJpaEntity model = this.cityJpaDaoMapper.modelToJpaEntity(city);
-//        log.debug("City JPA = {}", model);
+        log.debug("City JPA = {}", model);
         final CityJpaEntity cityJpaEntity = this.cityJpaRepository.save(model);
         this.cityJpaRepository.flush();
         return this.cityJpaDaoMapper.jpaEntityToModel(cityJpaEntity);

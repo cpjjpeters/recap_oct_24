@@ -13,7 +13,7 @@ public class HelloController {
     @GetMapping({"/hallo"})
     public String hello(Model model,
                         @RequestParam(value="name", required=false, defaultValue="World") String name) {
-//        log.debug("hallo: {}",name);
+        log.debug("hallo: {}",name);
         model.addAttribute("name", name);
         return "hello";
     }
