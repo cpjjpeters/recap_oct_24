@@ -23,7 +23,7 @@ public class CityJpaPersistenceService {
 
     public CityJpaPersistenceService(CityJpaRepository cityJpaRepository, CityJpaDaoMapper cityJpaDaoMapper) {
         this.cityJpaRepository = cityJpaRepository;
-        this.cityJpaDaoMapper = Selma.builder(cityJpaDaoMapper.getClass()).build(); ;
+        this.cityJpaDaoMapper = Selma.builder(CityJpaDaoMapper.class).build();
     }
 
     public List<City> findAll() {
