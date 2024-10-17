@@ -1,11 +1,11 @@
 package be.ipeters.recap.service;
 
-
-
 import be.ipeters.recap.common.jpa.CityJpaRepository;
 import be.ipeters.recap.common.jpa.entity.CityJpaEntity;
 import be.ipeters.recap.common.jpa.mapper.CityJpaDaoMapper;
+import be.ipeters.recap.error.ResourceNotFoundException;
 import be.ipeters.recap.model.City;
+import be.ipeters.recap.persistence.CityPersistenceFacade;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Service
-public class CityJpaPersistenceService {
+public class CityJpaPersistenceService implements CityPersistenceFacade {
 
     private final CityJpaRepository cityJpaRepository;
     private final CityJpaDaoMapper cityJpaDaoMapper;
@@ -25,21 +25,58 @@ public class CityJpaPersistenceService {
         this.cityJpaDaoMapper = cityJpaDaoMapper;
     }
 
+    @Override
+    public City save(City city) {
+        final CityJpaEntity cityJpaEntity = this.cityJpaRepository.save(cityJpaDaoMapper.modelToJpaEntity(city));
+        log.debug("City JPA = {}", cityJpaEntity.getName());
+        return this.cityJpaDaoMapper.jpaEntityToModel(cityJpaEntity);
+    }
+
     public List<City> findAll() {
         return this.cityJpaRepository.findAll()
                 .stream()
                 .map(this.cityJpaDaoMapper::jpaEntityToModel).collect(Collectors.toList());
     }
 
-    public City save(City city) {
-        final CityJpaEntity model = this.cityJpaDaoMapper.modelToJpaEntity(city);
-        log.debug("City JPA = {}", model);
-        final CityJpaEntity cityJpaEntity = this.cityJpaRepository.save(model);
-        this.cityJpaRepository.flush();
-        return this.cityJpaDaoMapper.jpaEntityToModel(cityJpaEntity);
+    public City findById(Long id) {
+        return this.cityJpaRepository.findById(id)
+                .map(this.cityJpaDaoMapper::jpaEntityToModel)
+                .orElseThrow(()-> new ResourceNotFoundException("City not found for this id ::" + id))
+                ;
     }
 
     public void deleteAll() {
         this.cityJpaRepository.deleteAll();
     }
+
+    public void delete(City city) {
+        this.cityJpaRepository.delete(this.cityJpaDaoMapper.modelToJpaEntity(city));
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        this.cityJpaRepository.deleteById(id);
+    }
+
+    @Override
+    public City update(City city) {
+        return this.cityJpaDaoMapper.jpaEntityToModel(this.cityJpaRepository.save(this.cityJpaDaoMapper.modelToJpaEntity(city)));
+    }
+//    public List<City> findAll() {
+//        return this.cityJpaRepository.findAll()
+//                .stream()
+//                .map(this.cityJpaDaoMapper::jpaEntityToModel).collect(Collectors.toList());
+//    }
+//
+//    public City save(City city) {
+//        final CityJpaEntity model = this.cityJpaDaoMapper.modelToJpaEntity(city);
+//        log.debug("City JPA = {}", model);
+//        final CityJpaEntity cityJpaEntity = this.cityJpaRepository.save(model);
+//        this.cityJpaRepository.flush();
+//        return this.cityJpaDaoMapper.jpaEntityToModel(cityJpaEntity);
+//    }
+//
+//    public void deleteAll() {
+//        this.cityJpaRepository.deleteAll();
+//    }
 }
