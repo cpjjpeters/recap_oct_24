@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layouts :: header"></head>
+
+<body>
+
+<nav th:replace="layouts :: navbar"></nav>
+	
+	<br>
+	<div class="container">
+	
+	
+		<form th:action="@{/cities/save}" th:object="${city}" method="POST">
+		
+		
+		<!--  This will be used to bind to the city that was clicked on (USED FOR UPDATES)-->
+		<input type="hidden" th:field="${city.id}"/>
+		
+		<h3>Enter City Information</h3>
+		<div class="form-group row">
+			<input type="text" placeholder="Name" th:field="${city.name}">
+			<span style="color:red" th:if="${#fields.hasErrors('name')}"
+				  th:errors="${city.name}">
+			</span>
+		</div>
+		
+		<div class="form-group row">
+			<input type="text" placeholder="Population" th:field="${city.population}">
+			<span style="color:red" th:if="${#fields.hasErrors('population')}"
+				  th:errors="${city.population}">
+			</span>
+		</div>
+		
+		<button class="btn btn-info col-2" type="submit">Save City</button>
+		
+		</form>
+	</div>
+	
+</body>
+
+</html>

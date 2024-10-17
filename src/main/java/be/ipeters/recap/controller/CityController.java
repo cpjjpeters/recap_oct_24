@@ -2,6 +2,7 @@ package be.ipeters.recap.controller;
 
 import be.ipeters.recap.model.City;
 import be.ipeters.recap.service.CityJpaPersistenceService;
+import be.ipeters.recap.service.CityService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -9,38 +10,44 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
 @Slf4j
 @Controller
-@RequestMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/recap/cities", produces = MediaType.APPLICATION_JSON_VALUE)
 public class CityController {
 
-    private final CityJpaPersistenceService cityJpaPersistenceService;
+//    private final CityJpaPersistenceService cityJpaPersistenceService;
+    private final CityService cityService;
 
-    public CityController(CityJpaPersistenceService cityJpaPersistenceService) {
-        this.cityJpaPersistenceService = cityJpaPersistenceService;
+    public CityController(CityService cityService) {
+        this.cityService = cityService;
     }
 
-    @GetMapping(value="welkom")
-    public String hello(Model model, @RequestParam(value="name", required=false, defaultValue="World") String name) {
-        log.debug("Welcome!");
-        model.addAttribute("name", name);
-        return "welcome";
+//    public CityController(CityJpaPersistenceService cityJpaPersistenceService) {
+//        this.cityJpaPersistenceService = cityJpaPersistenceService;
+//    }
+
+    @GetMapping("/new")
+    public String displayCityForm(Model model) {
+        log.debug("displayCityForm");
+        City aCity = new City();
+        model.addAttribute("city", aCity);
+        return "cities/new-city";
     }
 
-    @GetMapping(value = {"indeks", "all"})
-    public String index(Model model) {
-    log.debug("getmapping slash");
-        return "index";
+    @PostMapping("/save")
+    public String createCity(City city,Model model) {
+        log.debug("createCity");
+        cityService.save(city);
+        return "cities/new-city";
     }
 
-    @GetMapping(value="steden")
+    @GetMapping(value="/cities")
     public ModelAndView showCities() {
         log.debug("getmapping slash cities");
-        var cities = cityJpaPersistenceService.findAll();
+        var cities = cityService.findAll();
 
         var params = new HashMap<String, Object>();
         params.put("cities", cities);
@@ -48,9 +55,9 @@ public class CityController {
         return new ModelAndView("showCities", params);
     }
 
-    @PostMapping("/save")
-    public void createCity(City city) {
-        cityJpaPersistenceService.save(city);
-//        return "redirect:/steden";
-    }
+//    @PostMapping("/save")
+//    public void createCity(City city) {
+//        cityJpaPersistenceService.save(city);
+////        return "redirect:/steden";
+//    }
 }

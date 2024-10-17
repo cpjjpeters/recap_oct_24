@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	
+	<head th:replace="layouts :: header"></head>
+	
+	<body>
+	
+	<nav th:replace="layouts :: navbar"></nav>
+	
+		<div class="container">
+			<h3>City Directory</h3>
+			<hr>
+			
+			<!--Add New City Button -->
+			<a th:href="@{/employees/new}"
+				class="btn btn-primary btn-sm mb-3">
+				Add City
+			</a>
+			<br></br>
+			
+			<table class="table table-bordered table-striped">
+				<thead class="thead-dark">
+					<tr>
+						<th>Id </th>
+						<th>Name</th>
+						<th>population</th>
+					</tr>
+				</thead>		
+				<tbody>
+					<tr th:each="aCity : ${employees}">
+						<td th:text="${aCity.id}"/>
+						<td th:text="${aCity.name}"/>
+						<td th:text="${aCity.population}"/>
+						<td>
+							<a th:href="@{/employees/update(id=${aCity.id})}"
+								class="btn btn-info btn-sm">
+								Update
+							</a>
+							
+							<a th:href="@{/employees/delete(id=${aCity.})}"
+								class="btn btn-danger btn-sm"
+								onClick="if (!(confirm('Are you sure you want to delete this City?'))) return false">
+								Delete
+							</a>
+							
+						</td>
+					</tr>
+				</tbody>
+			
+			</table>
+		</div>
+	</body>
+	
+</html>
