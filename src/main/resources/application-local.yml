@@ -1,0 +1,37 @@
+server:
+  port: 8585
+#  servlet:
+#    context-path: /recap
+
+spring:
+  sql:
+    init:
+      mode: always
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:recapdb
+#    username: sa
+#    password:
+#initialization-mode: always
+
+#    url: jdbc:h2:~/Documenten/databaseH2/recapdb
+#
+#  freemarker:
+#    template-loader-path:
+#      classpath: /templates
+#    suffix: .ftlh
+#thymeleaf:
+# cache: false
+#h2:
+# console:
+#   enabled: true
+#   path: /h2-console
+#
+#logging:
+#  level:
+#    be.ipeters.recap.*: DEBUG
+#jpa:
+#  show-sql: true
+#  defer-datasource-initialization: true
+#  hibernate:
+#  ddl-auto: update

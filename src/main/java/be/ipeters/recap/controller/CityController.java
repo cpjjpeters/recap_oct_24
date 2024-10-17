@@ -1,11 +1,13 @@
 package be.ipeters.recap.controller;
 
+import be.ipeters.recap.model.City;
 import be.ipeters.recap.service.CityJpaPersistenceService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -44,5 +46,11 @@ public class CityController {
         params.put("cities", cities);
 
         return new ModelAndView("showCities", params);
+    }
+
+    @PostMapping("/save")
+    public void createCity(City city) {
+        cityJpaPersistenceService.save(city);
+//        return "redirect:/steden";
     }
 }
