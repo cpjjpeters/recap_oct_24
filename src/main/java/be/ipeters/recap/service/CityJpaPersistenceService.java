@@ -6,6 +6,7 @@ import be.ipeters.recap.common.jpa.CityJpaRepository;
 import be.ipeters.recap.common.jpa.entity.CityJpaEntity;
 import be.ipeters.recap.common.jpa.mapper.CityJpaDaoMapper;
 import be.ipeters.recap.model.City;
+import fr.xebia.extras.selma.Selma;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,7 @@ public class CityJpaPersistenceService {
 
     public CityJpaPersistenceService(CityJpaRepository cityJpaRepository, CityJpaDaoMapper cityJpaDaoMapper) {
         this.cityJpaRepository = cityJpaRepository;
-        this.cityJpaDaoMapper = cityJpaDaoMapper;
+        this.cityJpaDaoMapper = Selma.builder(cityJpaDaoMapper.getClass()).build(); ;
     }
 
     public List<City> findAll() {

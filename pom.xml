@@ -50,12 +50,26 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct -->
-		<dependency>
-			<groupId>org.mapstruct</groupId>
-			<artifactId>mapstruct</artifactId>
-			<version>${mapstruct.version}</version>
+<!--		&lt;!&ndash; https://mvnrepository.com/artifact/org.mapstruct/mapstruct &ndash;&gt;-->
+<!--		<dependency>-->
+<!--			<groupId>org.mapstruct</groupId>-->
+<!--			<artifactId>mapstruct</artifactId>-->
+<!--			<version>${mapstruct.version}</version>-->
 
+<!--		</dependency>-->
+
+		<!-- https://mvnrepository.com/artifact/fr.xebia.extras/selma -->
+		<dependency>
+			<groupId>fr.xebia.extras</groupId>
+			<artifactId>selma</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/fr.xebia.extras/selma-processor -->
+		<dependency>
+			<groupId>fr.xebia.extras</groupId>
+			<artifactId>selma-processor</artifactId>
+			<version>1.0</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
@@ -112,12 +126,12 @@
 					<source>21</source>
 					<target>21</target>
 					<annotationProcessorPaths>
-						<!-- MapStruct Processor -->
-						<path>
-							<groupId>org.mapstruct</groupId>
-							<artifactId>mapstruct-processor</artifactId>
-							<version>${mapstruct.version}</version>
-						</path>
+<!--						&lt;!&ndash; MapStruct Processor &ndash;&gt;-->
+<!--						<path>-->
+<!--							<groupId>org.mapstruct</groupId>-->
+<!--							<artifactId>mapstruct-processor</artifactId>-->
+<!--							<version>${mapstruct.version}</version>-->
+<!--						</path>-->
 						<!-- Lombok Processor -->
 						<path>
 							<groupId>org.projectlombok</groupId>
@@ -125,15 +139,15 @@
 							<version>${lombok.version}</version>
 						</path>
 						<!-- Lombok MapStruct Binding -->
-						<path>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok-mapstruct-binding</artifactId>
-							<version>0.2.0</version>
-						</path>
+<!--						<path>-->
+<!--							<groupId>org.projectlombok</groupId>-->
+<!--							<artifactId>lombok-mapstruct-binding</artifactId>-->
+<!--							<version>0.2.0</version>-->
+<!--						</path>-->
 					</annotationProcessorPaths>
-					<compilerArgs>
-						<compilerArg>-Amapstruct.defaultComponentModel=spring</compilerArg>
-					</compilerArgs>
+<!--					<compilerArgs>-->
+<!--						<compilerArg>-Amapstruct.defaultComponentModel=spring</compilerArg>-->
+<!--					</compilerArgs>-->
 				</configuration>
 			</plugin>
 		</plugins>
