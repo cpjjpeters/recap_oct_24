@@ -21,13 +21,13 @@ public class OrderCreationJpaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
-    private String documentId;
+    private Long documentId;
 
     @CreatedDate
     @Column(name = "CREATION_DATE", updatable = false)
-    private Instant creationDate;
+    protected Instant creationDate;
 
     @LastModifiedDate
     @Column(name = "LAST_UPDATE")
-    private Instant lastUpdate;
+    protected Instant lastUpdate;
 }

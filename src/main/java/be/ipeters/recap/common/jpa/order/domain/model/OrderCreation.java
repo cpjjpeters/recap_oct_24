@@ -4,6 +4,7 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 
@@ -11,6 +12,7 @@ import java.time.Instant;
 @Data
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class OrderCreation {
     private Long id;
     @Builder.Default
@@ -18,4 +20,6 @@ public class OrderCreation {
     @Builder.Default
     private Instant lastUpdate = Instant.now();
     private String documentId;
+
+
 }
