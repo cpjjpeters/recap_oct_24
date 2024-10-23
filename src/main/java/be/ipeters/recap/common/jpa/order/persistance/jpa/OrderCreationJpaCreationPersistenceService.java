@@ -27,7 +27,7 @@ public class OrderCreationJpaCreationPersistenceService implements OrderCreation
     @Override
     public OrderCreation save(OrderCreation orderCreation) {
         final OrderCreationJpaEntity orderCreationJpaEntity = orderCreationJpaDaoMapper.modelToEntity(orderCreation);
-        log.debug("Saving orderCreationJpaEntity: {}", orderCreationJpaEntity);
+        log.debug("Saving orderCreation {} into orderCreationJpaEntity: {}", orderCreation, orderCreationJpaEntity);
         final OrderCreationJpaEntity savedOrderCreationJpaEntity = orderCreationJpaRepository.save(orderCreationJpaEntity);
         this.orderCreationJpaRepository.flush();
         return this.orderCreationJpaDaoMapper.entityToModel(savedOrderCreationJpaEntity);
@@ -36,7 +36,10 @@ public class OrderCreationJpaCreationPersistenceService implements OrderCreation
 
     @Override
     public List<OrderCreation> findAll() {
-        return List.of();
+        return this.orderCreationJpaRepository.findAll()
+                .stream()
+                .map(this.orderCreationJpaDaoMapper::entityToModel)
+                .toList();
     }
 
     @Override

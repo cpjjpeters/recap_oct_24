@@ -17,12 +17,12 @@ public class OrderCreationService {
     private final OrderCreationPersistenceFacade orderCreationPersistenceFacade;
 
     public OrderCreation save(OrderCreation orderCreation) {
-        log.debug("save");
+        log.debug("save {}", orderCreation);
         return orderCreationPersistenceFacade.save(orderCreation);
     }
 
     public Optional<OrderCreation> findById(Long id) {
-        log.debug("findById");
+        log.debug("findById {}", id);
         return orderCreationPersistenceFacade.findById(id);
     }
 
