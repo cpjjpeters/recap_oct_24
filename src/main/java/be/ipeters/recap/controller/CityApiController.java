@@ -33,6 +33,12 @@ public class CityApiController {
         log.debug("findAll");
         return cityService.findAll();
     }
+
+    @GetMapping
+    public List<City> findDefault() {
+        log.debug("findDefault");
+        return cityService.findAll();
+    }
 //
 //    @GetMapping(value = "/{id}")
 //    public Optional<City> findById(@PathVariable(value = "id") Long id) {

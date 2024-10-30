@@ -12,7 +12,7 @@
 			<hr>
 			
 			<!--Add New City Button -->
-			<a th:href="@{/employees/new}"
+			<a th:href="@{/cities/new}"
 				class="btn btn-primary btn-sm mb-3">
 				Add City
 			</a>
@@ -27,17 +27,17 @@
 					</tr>
 				</thead>		
 				<tbody>
-					<tr th:each="aCity : ${employees}">
+					<tr th:each="aCity : ${cities}">
 						<td th:text="${aCity.id}"/>
 						<td th:text="${aCity.name}"/>
 						<td th:text="${aCity.population}"/>
 						<td>
-							<a th:href="@{/employees/update(id=${aCity.id})}"
+							<a th:href="@{/cities/update(id=${aCity.id})}"
 								class="btn btn-info btn-sm">
 								Update
 							</a>
 							
-							<a th:href="@{/employees/delete(id=${aCity.})}"
+							<a th:href="@{/cities/delete(id=${aCity.id})}"
 								class="btn btn-danger btn-sm"
 								onClick="if (!(confirm('Are you sure you want to delete this City?'))) return false">
 								Delete

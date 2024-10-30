@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.HashMap;
 @Slf4j
 @Controller
-@RequestMapping(value = "/recap/cities", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/cities", produces = MediaType.APPLICATION_JSON_VALUE)
 public class CityController {
 
 //    private final CityJpaPersistenceService cityJpaPersistenceService;
@@ -29,6 +29,13 @@ public class CityController {
 //        this.cityJpaPersistenceService = cityJpaPersistenceService;
 //    }
 
+    @GetMapping
+    public String showAllCities(Model model) {
+        log.debug("getmapping showAllCities");
+        var cities = cityService.findAll();
+        model.addAttribute("cities", cities);
+        return "cities/list-cities";
+    }
     @GetMapping("/new")
     public String displayCityForm(Model model) {
         log.debug("displayCityForm");
@@ -44,16 +51,13 @@ public class CityController {
         return "cities/new-city";
     }
 
-    @GetMapping(value="/cities")
-    public ModelAndView showCities() {
-        log.debug("getmapping slash cities");
-        var cities = cityService.findAll();
-
-        var params = new HashMap<String, Object>();
-        params.put("cities", cities);
-
-        return new ModelAndView("showCities", params);
-    }
+//    @GetMapping(value="/cities")
+//    public String showCities(Model model) {
+//        log.debug("getmapping slash cities");
+//        var cities = cityService.findAll();
+//        model.addAttribute("cities", cities);
+//        return "cities/list-cities";
+//    }
 
 //    @PostMapping("/save")
 //    public void createCity(City city) {
