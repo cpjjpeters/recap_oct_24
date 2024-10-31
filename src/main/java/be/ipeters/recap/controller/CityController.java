@@ -51,14 +51,6 @@ public class CityController {
         return "cities/new-city";
     }
 
-//    @GetMapping(value="/cities")
-//    public String showCities(Model model) {
-//        log.debug("getmapping slash cities");
-//        var cities = cityService.findAll();
-//        model.addAttribute("cities", cities);
-//        return "cities/list-cities";
-//    }
-
 //    @PostMapping("/save")
 //    public void createCity(City city) {
 //        cityJpaPersistenceService.save(city);
