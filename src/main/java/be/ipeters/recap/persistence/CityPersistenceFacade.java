@@ -20,4 +20,6 @@ public interface CityPersistenceFacade {
     void deleteById(Long id);
 
     City update(City city);
+
+    City findByCityId(long theId);
 }

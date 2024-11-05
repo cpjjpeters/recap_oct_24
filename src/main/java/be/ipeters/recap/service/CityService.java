@@ -47,4 +47,8 @@ public class CityService {
         this.cityPersistenceFacade.delete(city);
 
     }
+
+    public City findByCityId(long theId) {
+        return this.cityPersistenceFacade.findByCityId(theId);
+    }
 }

@@ -62,21 +62,10 @@ public class CityJpaPersistenceService implements CityPersistenceFacade {
     public City update(City city) {
         return this.cityJpaDaoMapper.jpaEntityToModel(this.cityJpaRepository.save(this.cityJpaDaoMapper.modelToJpaEntity(city)));
     }
-//    public List<City> findAll() {
-//        return this.cityJpaRepository.findAll()
-//                .stream()
-//                .map(this.cityJpaDaoMapper::jpaEntityToModel).collect(Collectors.toList());
-//    }
-//
-//    public City save(City city) {
-//        final CityJpaEntity model = this.cityJpaDaoMapper.modelToJpaEntity(city);
-//        log.debug("City JPA = {}", model);
-//        final CityJpaEntity cityJpaEntity = this.cityJpaRepository.save(model);
-//        this.cityJpaRepository.flush();
-//        return this.cityJpaDaoMapper.jpaEntityToModel(cityJpaEntity);
-//    }
-//
-//    public void deleteAll() {
-//        this.cityJpaRepository.deleteAll();
-//    }
+
+    @Override
+    public City findByCityId(long theId) {
+        return this.cityJpaDaoMapper.jpaEntityToModel(this.cityJpaRepository.findById(theId).orElse(null));
+    }
+
 }
