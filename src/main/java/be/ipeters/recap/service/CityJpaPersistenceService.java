@@ -1,15 +1,16 @@
 package be.ipeters.recap.service;
 
+import be.ipeters.recap.common.exception.NoSuchCityExistsException;
 import be.ipeters.recap.common.jpa.CityJpaRepository;
 import be.ipeters.recap.common.jpa.entity.CityJpaEntity;
 import be.ipeters.recap.common.jpa.mapper.CityJpaDaoMapper;
-import be.ipeters.recap.error.ResourceNotFoundException;
 import be.ipeters.recap.model.City;
 import be.ipeters.recap.persistence.CityPersistenceFacade;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -41,7 +42,11 @@ public class CityJpaPersistenceService implements CityPersistenceFacade {
     public City findById(Long id) {
         return this.cityJpaRepository.findById(id)
                 .map(this.cityJpaDaoMapper::jpaEntityToModel)
-                .orElseThrow(()-> new ResourceNotFoundException("City not found for this id ::" + id))
+                .orElseThrow(()
+                        -> new NoSuchElementException(
+//                        -> new NoSuchCityExistsException(
+                                "NO CITY PRESENT WITH ID = " +id))
+//                .orElseThrow(()-> new ResourceNotFoundException("City not found for this id ::" + id))
                 ;
     }
 

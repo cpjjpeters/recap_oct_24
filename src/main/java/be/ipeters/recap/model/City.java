@@ -14,6 +14,10 @@ public class City {
         this.name = name;
         this.population = population;
     }
+//
+//    public City(Long id) {
+//        this.id = id;
+//    }
 
     public City(Long id, String name, int population) {
         this.id = id;
@@ -87,4 +91,6 @@ public class City {
         sb.append('}');
         return sb.toString();
     }
+
+
 }

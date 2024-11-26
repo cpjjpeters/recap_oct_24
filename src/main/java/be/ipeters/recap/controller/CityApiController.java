@@ -47,10 +47,12 @@ public class CityApiController {
 //    }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<City> findById(@PathVariable(value = "id") Long id) {//} throws ResourceNotFoundException {
-        log.debug("findById");
+    public City findById(@PathVariable(value = "id") Long id) {//} throws ResourceNotFoundException {
+//        public ResponseEntity<City> findById(@PathVariable(value = "id") Long id) {//} throws ResourceNotFoundException {
+            log.debug("findById");
         City city = cityService.findById(id);
-        return ResponseEntity.ok().body(city);
+        return city;
+//        return ResponseEntity.ok().body(city);
     }
     @PostMapping("/create")
     public City createCity(@RequestBody City city) {
@@ -62,7 +64,7 @@ public class CityApiController {
     public ResponseEntity<City> update(@PathVariable("id") Long id, @RequestBody City updateCity) {
         log.debug("update");
         City city = cityService.findById(id);
-//        city.setId(updateCity.getId());
+        city.setId(updateCity.getId());
         city.setName(updateCity.getName());
         city.setPopulation(updateCity.getPopulation());
         final City updatedCity =  cityService.update(city);

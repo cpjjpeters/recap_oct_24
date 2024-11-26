@@ -1,8 +1,8 @@
 # Dockerfile for "recap" application using Java 21
 # Use an ARM-compatible base image with Java 21
-FROM eclipse-temurin:21-jre
+#FROM eclipse-temurin:21-jre
 # Use an official Azul Java runtime as a parent image
-#FROM azul/zulu-openjdk:21
+FROM azul/zulu-openjdk:21
 # Set the working directory in the container
 WORKDIR /app
 
