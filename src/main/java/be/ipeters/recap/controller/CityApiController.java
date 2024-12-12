@@ -4,6 +4,7 @@ package be.ipeters.recap.controller;
 import be.ipeters.recap.model.City;
 import be.ipeters.recap.service.CityService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -47,17 +49,20 @@ public class CityApiController {
 //    }
 
     @GetMapping(value = "/{id}")
-    public City findById(@PathVariable(value = "id") Long id) {//} throws ResourceNotFoundException {
-//        public ResponseEntity<City> findById(@PathVariable(value = "id") Long id) {//} throws ResourceNotFoundException {
+//    public City findById(@PathVariable(value = "id") Long id) {//} throws ResourceNotFoundException {
+        public ResponseEntity<City> findById(@PathVariable(value = "id") Long id) {//} throws ResourceNotFoundException {
             log.debug("findById");
         City city = cityService.findById(id);
-        return city;
-//        return ResponseEntity.ok().body(city);
+//        return city;
+        return ResponseEntity.ok().body(city);
+//        return new ResponseEntity<>(city, HttpStatus.OK);
     }
     @PostMapping("/create")
-    public City createCity(@RequestBody City city) {
-        log.debug("createCity");
-        return cityService.save(city);
+//    public City createCity(@RequestBody City city) {
+       public ResponseEntity<City> createCity(@RequestBody City city){
+        log.debug("create new City");
+//        return cityService.save(city);
+        return ResponseEntity.ok().body(cityService.save(city));
     }
 
     @PutMapping(value = "/update/{id}")
@@ -81,5 +86,12 @@ public class CityApiController {
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
         return response;
+    }
+
+    @DeleteMapping({"{id}"})
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteCity(@PathVariable("id") Long id){
+        log.debug("delete with just an id: {}", id);
+        cityService.deleteById(id);
     }
 }
