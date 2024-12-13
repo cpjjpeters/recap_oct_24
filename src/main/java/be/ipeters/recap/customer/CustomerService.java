@@ -12,7 +12,7 @@ public interface CustomerService {
     String addCustomer(Customer customer);
 
     // Method to update details of a Customer
-    String updateCustomer(Customer customer);
+    Customer updateCustomer(Customer customer);
 
     List<Customer> findAll();
 

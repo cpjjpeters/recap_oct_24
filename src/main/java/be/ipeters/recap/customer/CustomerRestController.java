@@ -1,19 +1,16 @@
 package be.ipeters.recap.customer;
 
 
-import be.ipeters.recap.common.exception.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -23,7 +20,7 @@ import java.util.Map;
 @Slf4j
 @RequestMapping("/app-api/customers")
 @RestController
-public class CustomerController {
+public class CustomerRestController {
 
     @Autowired
     private CustomerService customerService;
@@ -43,15 +40,22 @@ public class CustomerController {
 //     }
     // Get Customer by Id
     @GetMapping("/getCustomer/{id}")
-    public Customer getCustomer(@PathVariable("id") Long id)
+    public Customer getCustomerById(@PathVariable("id") Long id)
     {
-        log.debug("getCustomer with id {}", id);
+        log.debug("get Customer with id {}", id);
         return customerService.getCustomer(id);
     }
+    // Get Customer by Id
+    @GetMapping("/findCustomer/{id}")
+    public ResponseEntity<Customer> findCustomerById(@PathVariable("id") Long id)
+    {
+        log.debug("find Customer with id {}", id);
+        return ResponseEntity.ok().body( customerService.getCustomer(id));
+    }
     @PostMapping("/create")
-    public Customer createCustomer(@RequestBody Customer customer) {
+    public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
         log.debug("createCityCustomer");
-        return customerService.save(customer);
+        return ResponseEntity.ok().body(customerService.save(customer));
     }
     // Add new Customer
     @PostMapping(value = "/addCustomer")
@@ -63,11 +67,10 @@ public class CustomerController {
 
     // Update Customer details
     @PutMapping("/updateCustomer")
-    public String
-    updateCustomer(@RequestBody Customer customer)
+    public ResponseEntity<Customer>     updateCustomer(@RequestBody Customer customer)
     {
         log.debug("updateCustomer");
-        return customerService.updateCustomer(customer);
+        return ResponseEntity.ok().body(customerService.updateCustomer(customer));
     }
 
 

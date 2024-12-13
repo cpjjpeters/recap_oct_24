@@ -97,7 +97,7 @@ public class CustomerServiceImpl
     // Method to update customer details to database.Throws
     // NoSuchCustomerExistsException when customer doesn't
     // already exist in database
-    public String updateCustomer(Customer customer)
+    public Customer updateCustomer(Customer customer)
     {
         Customer existingCustomer
                 = customerRespository.findById(customer.getId())
@@ -109,8 +109,8 @@ public class CustomerServiceImpl
             existingCustomer.setName(customer.getName());
             existingCustomer.setAddress(
                     customer.getAddress());
-            customerRespository.save(existingCustomer);
-            return "Record updated Successfully";
+            return customerRespository.save(existingCustomer);
+//             "Record updated Successfully";
         }
     }
 

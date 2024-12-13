@@ -41,12 +41,6 @@ public class CityApiController {
         log.debug("findDefault");
         return cityService.findAll();
     }
-//
-//    @GetMapping(value = "/{id}")
-//    public Optional<City> findById(@PathVariable(value = "id") Long id) {
-//        log.debug("");
-//        return cityService.findById(id);
-//    }
 
     @GetMapping(value = "/{id}")
 //    public City findById(@PathVariable(value = "id") Long id) {//} throws ResourceNotFoundException {
